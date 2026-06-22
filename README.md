@@ -4,7 +4,15 @@
 
 ## Overview
 
-This repository contains the perception pipeline and Software-In-The-Loop (SITL) simulation stack developed for the International Micro Air Vehicle (IMAV) 2025 competition. The primary objective is to autonomously navigate a Micro Air Vehicle (MAV) through an indoor tunnel environment by detecting color-coded gates using a YOLO-based computer vision pipeline.
+This repository contains the perception pipeline and Software-In-The-Loop (SITL) simulation stack developed for the International Micro Air Vehicle (IMAV) 2025 competition.
+
+### Project Highlights
+- **Objective:** Architect a **YOLO perception pipeline** to detect color-coded gates for autonomous MAV tunnel navigation.
+- **Approach:** 
+  - Fine-tuned a **YOLO** model via **Roboflow** to classify Wide/Medium/Small gates for optimal alignment precision.
+  - Built a **Blender** 3D environment mirroring the indoor arena and imported it into **Gazebo** for simulation.
+  - Validated the perception stack via SITL using a containerized **ROS2, Docker, MAVROS, & ArduPilot** stack.
+- **Results:** Enabled the MAV to autonomously thread continuous 2-meter multi-gate corridors with high reliability.
 
 ## Repository Structure
 
