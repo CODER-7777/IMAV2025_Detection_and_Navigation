@@ -1,0 +1,8 @@
+services:
+  realsense:
+    build:
+      context: ./
+    network_mode: host
+    environment:
+        DISPLAY: $DISPLAY
+

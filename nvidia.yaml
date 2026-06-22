@@ -1,0 +1,41 @@
+services:
+  px4:
+    build:
+      context: ./px4/
+    container_name: px4
+    tty: true
+    network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - TERM=xterm-256color
+      - SSH_AUTH_SOCK=/ssh-agent
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /dev:/dev
+      - /var/run/dbus/:/var/run/dbus/:z
+      - ~/.ssh/ssh_auth_sock:/ssh-agent
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    runtime: nvidia
+    depends_on:
+      - mavlink_router
+
+  mavros:
+    build:
+      context: ./ros2/mavros/
+    network_mode: host
+    depends_on:
+      - mavlink_router
+
+  mavlink_router:
+    build:
+      context: ./mavlink_router/
+    network_mode: host

@@ -1,0 +1,23 @@
+services:
+  px4:
+    build:
+      context: ./px4/
+    network_mode: host
+    environment:
+        DISPLAY: $DISPLAY
+    tty: true
+    depends_on:
+      - mavlink_router
+
+  mavros:
+    build:
+      context: ./ros2/mavros/
+    network_mode: host
+    depends_on:
+      - mavlink_router
+
+  mavlink_router:
+    build:
+      context: ./mavlink_router/
+    network_mode: host
+
